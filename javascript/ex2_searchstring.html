@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<script type="text/javascript">
+	function SearchString(str, search_str) {
+		var select_case = document.querySelector("input[name=case_search]:checked").value; //get radio value
+		if(select_case=="Y"){
+			if(str==""||search_str==""){
+				alert("Please filled out!");
+				return false;
+			}
+			else{
+				var search = new RegExp(search_str, "g");
+				var count = (str.match(search) || []).length;
+				document.getElementById("result").innerHTML = count;
+			} 
+		} //Sensitive Case		
+		if(select_case=="N"){
+			if(str==""||search_str==""){
+				alert("Please filled out!");
+				return false;
+			}
+			else{
+				var search = new RegExp(search_str, "gi");
+				var count = (str.match(search) || []).length;
+				document.getElementById("result").innerHTML = count;	
+			}
+		} //Non Sensitive Case	
+    } //End function
+</script>
+
+<body>
+	<center>
+		<h2>Ex2 - Search String Non Sensitive Case</h2>
+		<hr>
+		<form method="GET" action="">
+			Text Input : <textarea rows="6" cols="50" name="InputStr" id="InputStr" value=""></textarea> <br><br>
+			Sensitive Case : <input type="radio" name="case_search" value="Y" checked> Yes 
+							 <input type="radio" name="case_search" value="N"> No <br><br>
+			Search : <input type="text" name="SearchStr" id="SearchStr" value=""> <br><br>		
+		</form> 
+		<button onclick="SearchString(InputStr.value,SearchStr.value)">Search</button> <br><br>
+		Result for Search : <span id="result"><span>
+	</center>
+</body>
+</html>
